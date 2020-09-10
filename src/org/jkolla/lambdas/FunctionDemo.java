@@ -66,5 +66,13 @@ public class FunctionDemo {
                 // Collectors.toMap(u -> u.getName(), u -> u.getAge())
                 Collectors.toMap(User::getName, User::getAge)));
 
+        List<Integer> ages = users.stream().map(User::getAge).collect(Collectors.toList());
+        // .collect(Collectors.toUnmodifiableList());
+        // ages.add(99); Error when using toUnmodifiableList()
+        System.out.println(ages);
+        System.out.println(ages.getClass());
+        System.out.println(users.stream().filter(p -> p.getAge() > 30).map(p -> p.getName()).map(String::toUpperCase)
+                .collect(Collectors.joining(",")));
+
     }
 }
