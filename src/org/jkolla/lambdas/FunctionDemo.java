@@ -74,5 +74,9 @@ public class FunctionDemo {
         System.out.println(users.stream().filter(p -> p.getAge() > 30).map(p -> p.getName()).map(String::toUpperCase)
                 .collect(Collectors.joining(",")));
 
+        System.out.println(users.stream().collect(Collectors.partitioningBy(p -> p.getAge() % 2 == 0)));
+        // {false=[User{name=Jogi, age=31}, User{name=Humisha, age=1},
+        // User{name=Sudhakar, age=35}, User{name=Vanaja, age=35}],
+        // true=[User{name=Sumarchitha, age=26}, User{name=Vasanthi, age=32}]}
     }
 }
