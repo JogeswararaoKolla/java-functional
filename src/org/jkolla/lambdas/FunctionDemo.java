@@ -25,7 +25,12 @@ public class FunctionDemo {
 
         // System.out.println(users);
         List<String> names = new ArrayList<>();
-
+        /*
+         * A Lambda Expression implements a Functional Interface Functional interface
+         * has only one abstract method default and static methods do not count methods
+         * from object class toString, equals do not count Functional interface is
+         * annotated with @FunctionalInterface
+         */
         // @FunctionalInterface
         // public interface Function<T, R> {
         // R apply(T t);
