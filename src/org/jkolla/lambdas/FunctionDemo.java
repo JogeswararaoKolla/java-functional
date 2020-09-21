@@ -83,5 +83,21 @@ public class FunctionDemo {
         // {false=[User{name=Jogi, age=31}, User{name=Humisha, age=1},
         // User{name=Sudhakar, age=35}, User{name=Vanaja, age=35}],
         // true=[User{name=Sumarchitha, age=26}, User{name=Vasanthi, age=32}]}
+
+        //one-to-one function
+        List<Integer>  numbers = List.of(1,2,3);
+        System.out.println(numbers.stream()
+        .map(e->e*2)
+        .collect(Collectors.toList()));
+        //Stream<T>.map(Function one to one) ==> Stream<R>
+
+        //one-to-many function
+        System.out.println(numbers.stream()
+                .map(e-> List.of(e-1,e+1)) // one to many function
+                .collect(Collectors.toList()));
+       // Stream<T>.map(f1n) ==> Stream<List<R>>
+
+      // Stream<T>.???(f1n) ==> Stream<<R>>
+
     }
 }
