@@ -2,7 +2,9 @@ package org.jkolla.lambdas;
 
 import java.util.*;
 import java.util.function.Function;
+import java.util.stream.Collector;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import org.jkolla.lambdas.models.User;
 
@@ -72,5 +74,14 @@ public class CollectorsDemo {
                 // groupingBy takes a Collector for example mapping
                 // mapping takes a Collector for example toList
                 // recursive nature
+
+                System.out.println(users.stream().collect(Collectors.groupingBy(User::getAge, Collectors.mapping(
+                                p -> p.getName().toUpperCase(),
+                                Collectors.flatMapping(e -> Stream.of(e.split("")), Collectors.toSet())))));
+                // flatMapping is Mapping and then Flattening
+                // mapping(Function mapper , Collector downstream )
+                // result : {32=[A, R, S, D, U, N], 33=[A, R, S, I, M], 20=[ , A, R, T, H, M, N,
+                // O], 27=[R, N, O], 29=[ , A, T, H, M, N, O]}
         }
+
 }

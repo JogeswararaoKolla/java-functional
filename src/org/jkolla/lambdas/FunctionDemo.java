@@ -84,20 +84,28 @@ public class FunctionDemo {
         // User{name=Sudhakar, age=35}, User{name=Vanaja, age=35}],
         // true=[User{name=Sumarchitha, age=26}, User{name=Vasanthi, age=32}]}
 
-        //one-to-one function
-        List<Integer>  numbers = List.of(1,2,3);
-        System.out.println(numbers.stream()
-        .map(e->e*2)
-        .collect(Collectors.toList()));
-        //Stream<T>.map(Function one to one) ==> Stream<R>
-
-        //one-to-many function
-        System.out.println(numbers.stream()
-                .map(e-> List.of(e-1,e+1)) // one to many function
+        // one-to-one function
+        List<Integer> numbers = List.of(1, 2, 3);
+        System.out.println(numbers.stream().map(element -> element * 2) // Function<T,R> ==> Stream<R>
                 .collect(Collectors.toList()));
-       // Stream<T>.map(f1n) ==> Stream<List<R>>
+        // result : [2, 4, 6]
+        // Stream<T>.map(Function one to one) ==> Stream<R>
 
-      // Stream<T>.???(f1n) ==> Stream<<R>>
+        // one-to-many function
+        System.out.println(numbers.stream().map(e -> List.of(e - 1, e + 1)) // one to many function
+                .collect(Collectors.toList()));
+        // if you have one to many function , use map to go from Stream<T>.map(f1n) ==>
+        // Stream<Collection<R>>
+        // result : [[0, 2], [1, 3], [2, 4]]
+
+        // Stream<Stream<Integer>>
+        System.out.println(numbers.stream() // Stream<Integer>
+                .flatMap(e -> List.of(e - 1, e + 1).stream()) // Stream<Stream<Integer>>
+                // Function<T,Stream<R>) ==> Stream<R>
+                .collect(Collectors.toList()));
+        // if you have one to many function, use flatMap to go Stream<T>.flatMap(f1n)
+        // ==> Stream<R>
+        // result : [0, 2, 1, 3, 2, 4]
 
     }
 }
