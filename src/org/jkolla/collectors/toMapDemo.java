@@ -8,7 +8,7 @@ import java.util.Map;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
-public class Collectors_toMap {
+public class toMapDemo {
     public static List<Movie> createMovies(){
         return new ArrayList<>(){{
             add(new Movie("Rangasthalam","2018", 8.4,Arrays.asList("Ram Charan","Samantha Ruth Prabhu", "Aadhi", "Jagapathi Babu")));
