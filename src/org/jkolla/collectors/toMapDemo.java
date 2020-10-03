@@ -1,4 +1,4 @@
-package org.jkolla.generics;
+package org.jkolla.collectors;
 import org.jkolla.models.*;
 
 import java.util.ArrayList;
