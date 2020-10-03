@@ -36,5 +36,19 @@ public class mappingDemo {
         // mapping takes (Function mapper ,Collector)
         System.out.println("moviesByReleaseYear2 = " + moviesByReleaseYear2); // moviesByReleaseYear2 = {2019=[5.2, 7.5], 2018=[8.4, 7.7], 2017=[8.2, 8.1], 2016=[7.6], 2015=[8.1], 2020=[7.2]}
 
+        // Re-mapping using the toMap Collector
+        // toMap do not accepts duplicates and it throws IllegalStateException
+        // static <T,K,U> Collector<T,?,Map<K,U>>	toMap(Function<? super T,? extends K> keyMapper, Function<? super T,? extends U> valueMapper)
+        // Returns a Collector that accumulates elements into a Map whose keys and values are the result of applying the provided mapping functions to the input elements.
+
+        Map<String, List<Double>> moviesByReleaseYear3 = movies.stream()
+                .collect(Collectors.groupingBy(Movie::getMovieReleaseYear))  // Map<String, List<Movie>>
+                .entrySet().stream()
+                .collect(Collectors.toMap(
+                        entry -> entry.getKey(),
+                        entry -> entry.getValue().stream().map(e -> e.getRating()).collect(Collectors.toList())
+                ));
+        System.out.println("moviesByReleaseYear3 = " + moviesByReleaseYear3);
+        
     }
 }
