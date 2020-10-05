@@ -64,6 +64,14 @@ public class mappingDemo {
                 ));
         System.out.println("movieNameByYearRating = " + movieNameByYearRating);
 
+        Map<String, String> movieNameByYearRating2 = movies.stream()
+                .collect(Collectors.groupingBy(Movie::getMovieReleaseYear,
+                        Collectors.collectingAndThen(
+                                Collectors.maxBy(Comparator.comparing(Movie::getRating)),
+                                movie -> movie.map(e -> e.getMovieName()).orElse("")
+                        )));
+        System.out.println("movieNameByYearRating2 = " + movieNameByYearRating2);
+
         Optional<Map.Entry<String, String>> collect = movieByYearRating
                 .entrySet()
                 .stream()
