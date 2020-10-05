@@ -2,6 +2,7 @@ package org.jkolla.collectors;
 
 import org.jkolla.models.Movie;
 
+import java.sql.SQLOutput;
 import java.util.*;
 import java.util.function.BiConsumer;
 import java.util.function.Function;
@@ -28,6 +29,36 @@ public class maxByDemo {
         Optional<Movie> maxMovieByRating= movies.stream()
                 .collect(Collectors.maxBy(Comparator.comparing(Movie::getRating)));
         System.out.println("maxMovieByRating = " + maxMovieByRating); // maxMovieByRating = Optional[Movie{movieName='Rangasthalam', movieReleaseYear='2018', rating=8.4, actors=[Ram Charan, Samantha Ruth Prabhu, Aadhi, Jagapathi Babu]}]
+
+        System.out.println();
+        System.out.println(maxMovieByRating.filter(e -> e.getRating() > 9.0)
+                .map(e -> e.getMovieName()).orElseGet(()-> "No Movie with gt 9 rating")); // No Movie with gt 9 rating
+
+//        System.out.println(maxMovieByRating.filter(e -> e.getRating() > 9.0)
+//                .map(e -> e.getMovieName()).get()); // java.util.NoSuchElementException: No value present
+
+        if(maxMovieByRating.isPresent()) {
+            String movieName = maxMovieByRating.map(e -> e.getMovieName()).get();
+            System.out.println("movieName = " + movieName);
+        } // to avoid java.util.NoSuchElementException check isPresent()  on Optional before applying get() method
+
+        System.out.println(maxMovieByRating.map(e -> null)); // Optional.empty
+
+//        <U> Optional<U>	map(Function<? super T,? extends U> mapper)
+//        If a value is present, apply the provided mapping function to it, and if the result is non-null, return an Optional describing the result.
+
+        System.out.println(maxMovieByRating.map( e -> e.getMovieName())); // Optional[Rangasthalam]
+        System.out.println(maxMovieByRating
+                .filter( e-> e.getRating() > 9)
+                .map( e -> e.getMovieName()));  // Optional.empty
+
+        System.out.println(maxMovieByRating.filter(e -> e.getRating() > 9.0)
+                .map(e -> e.getMovieName()).isPresent()); // false
+
+        maxMovieByRating = Optional.empty();
+       // static <T> Optional<T>	empty() Returns an empty Optional instance.
+        System.out.println(maxMovieByRating.orElseGet(Movie::new)); // Movie{movieName='null', movieReleaseYear='null', rating=null, actors=null}
+        System.out.println();
 
        Map<String, Long> movieMap= movies.stream()
                 .flatMap(movie -> movie.getActors().stream())
