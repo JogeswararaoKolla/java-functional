@@ -2,7 +2,6 @@ package org.jkolla.collectors;
 
 import org.jkolla.models.Movie;
 
-import java.sql.SQLOutput;
 import java.util.*;
 import java.util.function.BiConsumer;
 import java.util.function.Function;
