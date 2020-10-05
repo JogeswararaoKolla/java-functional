@@ -3,7 +3,6 @@ package org.jkolla.collectors;
 import org.jkolla.models.Movie;
 
 import java.util.*;
-import java.util.function.Function;
 import java.util.stream.Collectors;
 
 public class mappingDemo {
@@ -72,7 +71,7 @@ public class mappingDemo {
                         )));
         System.out.println("movieNameByYearRating2 = " + movieNameByYearRating2);
 
-        Optional<Map.Entry<String, String>> collect = movieByYearRating
+        Optional<Map.Entry<String, String>> movieMaxByYearRating = movieByYearRating
                 .entrySet()
                 .stream()
                 .collect(Collectors.toMap(
@@ -81,7 +80,7 @@ public class mappingDemo {
                 )).entrySet()
                 .stream()
                 .collect(Collectors.maxBy(Map.Entry.comparingByKey()));
-        System.out.println("collect = " + collect); // collect = Optional[2020=Ala Vaikunthapurramuloo]
+        System.out.println("movieMaxByYearRating = " + movieMaxByYearRating); // collect = Optional[2020=Ala Vaikunthapurramuloo]
     }
 }
 
