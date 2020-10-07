@@ -1,12 +1,14 @@
 package org.jkolla.collectors;
 
 import org.jkolla.models.Movie;
+import org.jkolla.models.MovieMapperFlat;
 
 import java.util.*;
 import java.util.function.BiConsumer;
 import java.util.function.Function;
 import java.util.function.Supplier;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class maxByDemo {
     public static List<Movie> createMovies(){
@@ -67,6 +69,12 @@ public class maxByDemo {
         Optional<Map.Entry<String, Long>> maxMovieByActors= movieMap.entrySet().stream()
                 .collect(Collectors.maxBy(Comparator.comparing(entry -> entry.getValue())));
         System.out.println("maxMovieByActors = " + maxMovieByActors); // maxMovieByActors = Optional[Prabhas=3]
+
+        List<MovieMapperFlat> collect = movies.stream()
+                .flatMap(movie -> movie.getActors().stream()
+                        .map(actor -> new MovieMapperFlat(movie.getMovieName(), Integer.valueOf(movie.getMovieReleaseYear()), movie.getRating(), actor)))
+                .collect(Collectors.toList());
+        System.out.println("collect = " + collect);
 
         // Collector is created
         // Building a supplier Interface
