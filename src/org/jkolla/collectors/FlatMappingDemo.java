@@ -5,6 +5,8 @@ import org.jkolla.models.MovieMapperFlat;
 
 import java.util.*;
 import java.util.function.Function;
+import java.util.stream.Collectors;
+
 import static java.util.stream.Collectors.*;
 
 public class FlatMappingDemo {
@@ -39,7 +41,7 @@ public class FlatMappingDemo {
                 );
         System.out.println("movieActorsCnt = " + movieActorsCnt); // movieActorsCnt = Optional[Prabhas=3]
 
-        // Transform Collection<Movies> to Collection<MovieMapperFlat>
+        // Transform Collection<Movies> to Collection<MovieMapperFlat> using flatMapping method on Collector
 
         List<MovieMapperFlat> movieMapperFlatList = movies.stream()
                 .collect(
@@ -49,6 +51,14 @@ public class FlatMappingDemo {
                         ));
         System.out.println("movieMapperFlatList = " + movieMapperFlatList);
         movieMapperFlatList.forEach(System.out::println);
+
+        // Transform Collection<Movies> to Collection<MovieMapperFlat> using flatMap method on stream
+        List<MovieMapperFlat> movieMapperFlatList2 = movies.stream()
+                .flatMap(movie -> movie.getActors().stream()
+                        .map(actor -> new MovieMapperFlat(movie.getMovieName(), Integer.valueOf(movie.getMovieReleaseYear()), movie.getRating(), actor)))
+                .collect(Collectors.toList());
+        System.out.println("movieMapperFlatList2 = " + movieMapperFlatList2);
+
 
         // MovieMapperFlat  list by Actors
         Map<String, List<MovieMapperFlat>> moviesByActorList = movies.stream()
@@ -72,6 +82,5 @@ public class FlatMappingDemo {
         System.out.println("movieNamesByActorList = " + movieNamesByActorList);
         movieNamesByActorList.forEach((key,value) ->
                 System.out.println("key:" + key +";Value:" + value));
-
     }
 }
