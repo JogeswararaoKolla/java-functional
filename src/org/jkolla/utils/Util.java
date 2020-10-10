@@ -37,8 +37,10 @@ public class Util {
 
     public List<FilterOption> createFilterOptions() {
         return new ArrayList<>() {{
-            add(new FilterOption("936",Arrays.asList("475","877","900",null)));
-            add(new FilterOption("979",Arrays.asList("475","877","900",null)));
+            add(new FilterOption("936",Arrays.asList("475","877","475",null)));
+            add(new FilterOption("980",Arrays.asList("900","900","empty",null,"null")));
+            add(new FilterOption("947",Arrays.asList("189","",null,"null")));
+            add(new FilterOption());
         }};
     }
     public List<Movie> createMovies() {
