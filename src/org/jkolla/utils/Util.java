@@ -23,12 +23,24 @@ public class Util {
                   new ProductDetail("936","475","HoneyCrisp Apples",4.97,3),
                   new ProductDetail("936","877","Organic Gala Apples",5.80,3)
           )));
+            add(new Product("979","Pear","2020-10-12",Arrays.asList(
+                    new ProductDetail("979","860","Bartlett Pears",3.92,3),
+                    new ProductDetail("979","309","Organic Anjou Pears",3.86,2),
+                    new ProductDetail("979","597","Bosc Pears",1.38,1)
+            )));
+            add(new Product("947","Orange","2020-10-15",Arrays.asList(
+                    new ProductDetail("947","113","Clementines",4.37,3),
+                    new ProductDetail("947","189","Navel Oranges",3.88,3)
+            )));
         }};
     }
 
     public List<FilterOption> createFilterOptions() {
         return new ArrayList<>() {{
-            add(new FilterOption("936",Arrays.asList("475","877","900",null)));
+            add(new FilterOption("936",Arrays.asList("475","877","475",null)));
+            add(new FilterOption("980",Arrays.asList("900","900","empty",null,"null")));
+            add(new FilterOption("947",Arrays.asList("189","",null,"null")));
+            add(new FilterOption());
         }};
     }
     public List<Movie> createMovies() {
