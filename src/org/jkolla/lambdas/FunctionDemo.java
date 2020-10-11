@@ -11,8 +11,8 @@ import org.jkolla.lambdas.models.User;
 public class FunctionDemo {
 
   public static void main(String[] args) {
+    
     List<User> users = new ArrayList<>() {
-
       {
         add(new User("Jogi", 31));
         add(new User("Sumarchitha", 26));
@@ -67,17 +67,17 @@ public class FunctionDemo {
     for (User u : users) {
       nameAndAge.put(u.getName(), u.getAge());
     }
-    System.out.println(nameAndAge);
+    System.out.println("nameAndAge = " + nameAndAge);
 
-    System.out.println(
-      users
-        .stream()
-        .collect(
-          // Collectors.toMap(keyMapper, valueMapper)
-          // Collectors.toMap(u -> u.getName(), u -> u.getAge())
-          Collectors.toMap(User::getName, User::getAge)
-        )
-    );
+
+    Map<String, Integer> nameAndAgeMap = users
+            .stream()
+            .collect(
+                    // Collectors.toMap(keyMapper, valueMapper)
+                    // Collectors.toMap(u -> u.getName(), u -> u.getAge())
+                    Collectors.toMap(User::getName, User::getAge)
+            );
+    System.out.println("nameAndAgeMap = " + nameAndAgeMap);
 
     List<Integer> ages = users
       .stream()
@@ -86,24 +86,15 @@ public class FunctionDemo {
     // .collect(Collectors.toUnmodifiableList());
     // ages.add(99); Error when using toUnmodifiableList()
     System.out.println(ages);
-    System.out.println(ages.getClass());
-    System.out.println(
-      users
-        .stream()
-        .filter(p -> p.getAge() > 30)
-        .map(p -> p.getName())
-        .map(String::toUpperCase)
-        .collect(Collectors.joining(","))
-    );
+    System.out.println(ages.getClass()); // class java.util.ArrayList
 
-    System.out.println(
-      users
-        .stream()
-        .collect(Collectors.partitioningBy(p -> p.getAge() % 2 == 0))
-    );
-    // {false=[User{name=Jogi, age=31}, User{name=Humisha, age=1},
-    // User{name=Sudhakar, age=35}, User{name=Vanaja, age=35}],
-    // true=[User{name=Sumarchitha, age=26}, User{name=Vasanthi, age=32}]}
+
+    Map<Boolean, List<String>> partitionByAgeEven = users
+            .stream()
+            .collect(Collectors.partitioningBy(p -> p.getAge() % 2 == 0,
+                    Collectors.mapping(m -> m.getName(),
+                            Collectors.toList())));
+    System.out.println("partitionByAgeEven = " + partitionByAgeEven); // partitionByAgeEven = {false=[Jogi, Humisha, Sudhakar, Vanaja], true=[Sumarchitha, Vasanthi]}
 
     // one-to-one function
     List<Integer> numbers = List.of(1, 2, 3);
@@ -117,26 +108,24 @@ public class FunctionDemo {
     // Stream<T>.map(Function one to one) ==> Stream<R>
 
     // one-to-many function
-    System.out.println(
-      numbers
-        .stream()
-        .map(e -> List.of(e - 1, e + 1)) // one to many function
-        .collect(Collectors.toList())
-    );
+    List<List<Integer>> oneToManyNumbers = numbers
+            .stream()
+            .map(e -> List.of(e - 1, e + 1)) // one to many function
+            .collect(Collectors.toList());
+    System.out.println("oneToManyNumbers = " + oneToManyNumbers);
     // if you have one to many function , use map to go from Stream<T>.map(f1n) ==>
     // Stream<Collection<R>>
     // result : [[0, 2], [1, 3], [2, 4]]
 
-    // Stream<Stream<Integer>>
-    System.out.println(
-      numbers
-        .stream() // Stream<Integer>
-        .flatMap(e -> List.of(e - 1, e + 1).stream()) // Stream<Stream<Integer>>
-        // Function<T,Stream<R>) ==> Stream<R>
-        .collect(Collectors.toList())
-    );
-    // if you have one to many function, use flatMap to go Stream<T>.flatMap(f1n) ==> Stream<R>
-    // result : [0, 2, 1, 3, 2, 4]
+    List<Integer> flatMapNumbers = numbers
+            .stream() // Stream<Integer>
+            .flatMap(e -> List.of(e - 1, e + 1).stream()) // Stream<Stream<Integer>>
+            // Function<T,Stream<R>) ==> Stream<R>
+            .collect(Collectors.toList());
 
+    System.out.println("flatMapNumbers = " + flatMapNumbers);
+
+    // if you have one to many function, use flatMap to go Stream<T>.flatMap(f1n) ==> Stream<R>
+    // flatMapNumbers = [0, 2, 1, 3, 2, 4]
   }
 }
