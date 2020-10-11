@@ -75,7 +75,18 @@ public class FunctionDemo {
             .collect(
                     // Collectors.toMap(keyMapper, valueMapper)
                     // Collectors.toMap(u -> u.getName(), u -> u.getAge())
-                    Collectors.toMap(User::getName, User::getAge)
+                    Collectors.toMap(new Function<User, String>() {
+                      @Override
+                      public String apply(User user) {
+                        return user.getName();
+                      }
+                    }, new Function<User, Integer>() {
+                      @Override
+                      public Integer apply(User user) {
+                        return user.getAge();
+                      }
+                    })
+                 //   Collectors.toMap(User::getName, User::getAge)
             );
     System.out.println("nameAndAgeMap = " + nameAndAgeMap);
 
