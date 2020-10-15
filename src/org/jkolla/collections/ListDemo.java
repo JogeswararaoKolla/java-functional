@@ -33,6 +33,7 @@ public class ListDemo {
                                 .filter(e -> filterOptionsMap.get(product.getProductId()).contains(e.getProductMerchantId()))
                                 .collect(Collectors.toList());
                         System.out.println("collect = " + collect);
+                        if( ! filterOptionsMap.get(product.getProductId()).isEmpty())
                         product.setProductDetails(collect);
                         return product;
                     }
