@@ -43,14 +43,14 @@ public class MapMergeDemo {
          else
          map3.computeIfAbsent(key,e -> {
              System.out.println("Inside the computeIfAbsent");
-             System.out.println(e);
-             System.out.println(value);
+             System.out.println("Key = " + e);
+             System.out.println("New Value = " + value);
              return value;
          });
 
      });
 
- System.out.println("After Compute method calls map3= " + map3);
+ System.out.println("After Compute method calls map3= " + map3); // After Compute method calls map3= {850=Broccoli, 970=Carrots,Cabbage, 314=Spinach,Asparagus, 551=Lettuce, 303=Tomato,Tomato}
 
 // default V merge(K key, V value, BiFunction<? super V, ? super V, ? extends V> remappingFunction)
 // If the specified key is not already associated with a value or is associated with null, associates it with the given non-null value.
@@ -64,7 +64,7 @@ public class MapMergeDemo {
                 }
             });
         });
-        System.out.println("After calling merge method map1 = " + map1); // After calling merge method map1 = {850=Broccoli, 970=Carrots,Cabbage,Cabbage, 314=Spinach,Asparagus,Asparagus, 303=Tomato}
+        System.out.println("After calling merge method map1 = " + map1); // After calling merge method map1 = {850=Broccoli, 551=Lettuce, 970=Carrots,Cabbage, 314=Spinach,Asparagus, 303=Tomato,Tomato}
 
     }
 }
