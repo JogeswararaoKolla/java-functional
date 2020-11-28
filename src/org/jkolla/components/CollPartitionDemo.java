@@ -18,10 +18,15 @@ public class CollPartitionDemo {
         List<Integer> numbers = Arrays.asList(1,2,3,4,5,6,7,8,9,10);
         UtilFunction<Integer> partitionNumbers = new UtilFunction<>();
         System.out.println("Even Numbers : " + partitionNumbers.getCollSatisfyingCondition(numbers,e -> e % 2 == 0 )); // Even Numbers : [2, 4, 6, 8, 10]
+        
         UtilFunction<String> partition = new UtilFunction<>();
         System.out.println("namesStartsWithV = " + partition.getCollSatisfyingCondition(names,s -> s.startsWith("V") || s.startsWith("S"))); // namesStartsWithV = [Suma, Vanaja, Vasanthi]
         System.out.println("namesStartsWithJ = " + partition.getCollSatisfyingCondition(names,s -> s.startsWith("J"))); // namesStartsWithJ = [Jogi]
         System.out.println("namesStartsWithH = " + partition.getCollSatisfyingCondition(names,s -> s.startsWith("H"))); // namesStartsWithH = [Humisha]
+        
+        List<String> strings = Arrays.asList("Hello",null,"Jogi",null);
+        System.out.println("strings = " + strings);
+        System.out.println("partition.getCollNonNullElements(strings) = " + partition.getCollNonNullElements(strings)); // [Hello, Jogi]
 
     }
 }
