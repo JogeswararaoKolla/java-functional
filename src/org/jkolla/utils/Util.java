@@ -2,6 +2,8 @@ package org.jkolla.utils;
 
 import org.jkolla.models.*;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -79,6 +81,36 @@ public class Util {
             add(new Customer(1600085768,"TERESA","MCGINNIS","4346 Winterberry Way","AUSTIN","TX",78757));
             add(new Customer(1600088462,"GAYNELLE","LEA","8689 Tappan St","SAINT LOUIS","MO",63106));
             add(new Customer(1600090810,"RONALD","CHASE","5290 Porter St","NEW YORK","NY",10023));
+        }};
+    }
+
+    public List<StoreInfo> createStoreInfo() {
+        return new ArrayList<StoreInfo>() {{
+            add(new StoreInfo(1101,"4867 Stephanie Cir       ","BAKERSFIELD              ","CA","93311","JEFFERY SCHAUBERT        ","                         ","                         "));
+            add(new StoreInfo(1102,"2250 Lee Rd              ","BAKERSFIELD              ","CA","93306","MARY ZARATE              ","AGUSTIN COTTON           ","                         "));
+            add(new StoreInfo(1103,"2661 H St                ","FRESNO                   ","CA","93726","EDWARD MCGIVNEY          ","                         ","                         "));
+            add(new StoreInfo(1104,"3416 Pine Grove Rd       ","FRESNO                   ","CA","93701","DEBORAH DURETT           ","MICHAEL ALLEN            ","                         "));
+            add(new StoreInfo(1105,"2046 Bradbury St         ","FRESNO                   ","CA","93711","RUBY CAREY               ","                         ","                         "));
+            add(new StoreInfo(1106,"4065 Randolph Pl         ","LOS ANGELES              ","CA","90019","RUBY CAREY               ","                         ","                         "));
+            add(new StoreInfo(1107,"325 Jackson Ter          ","LOS ANGELES              ","CA","90008","KENNETH FOOS             ","                         ","                         "));
+            add(new StoreInfo(1108,"181 Country Club Cir     ","LOS ANGELES              ","CA","90024","BOBBIE SWAN              ","                         ","                         "));
+            add(new StoreInfo(1109,"4990 Oriole Ave          ","LOS ANGELES              ","CA","90027","JENNIFER RILEY           ","                         ","                         "));
+            add(new StoreInfo(1110,"798 Laurelwood Dr        ","LOS ANGELES              ","CA","90077","TED CODY                 ","                         ","                         "));
+            add(new StoreInfo(1111,"3704 Magnulia Dr         ","LOS ANGELES              ","CA","90068","DEBORAH DURETT           ","HELEN WHITE              ","DONALD BADER             "));
+            add(new StoreInfo(1112,"1394 Bello Ln            ","LOS ANGELES              ","CA","90064","JOY WILLIAMS             ","JERRY COOLEY             ","                         "));
+        }};
+    }
+
+    public List<CustomerTransaction> createCustomerTransaction(){
+        return new ArrayList<CustomerTransaction>(){{
+            add(new CustomerTransaction ("C008231", LocalDate.parse("1993.10.22" , DateTimeFormatter.ofPattern("yyyy.MM.dd")),122.00));
+            add(new CustomerTransaction ("C002142", LocalDate.parse("1994.06.22" , DateTimeFormatter.ofPattern("yyyy.MM.dd")),22.25));
+            add(new CustomerTransaction ("C003213", LocalDate.parse("1993.02.12" , DateTimeFormatter.ofPattern("yyyy.MM.dd")),47.95));
+            add(new CustomerTransaction ("C003213", LocalDate.parse("1995.12.11" , DateTimeFormatter.ofPattern("yyyy.MM.dd")),17.42));
+            add(new CustomerTransaction ("C002142", LocalDate.parse("1994.03.23" , DateTimeFormatter.ofPattern("yyyy.MM.dd")),52.20));
+            add(new CustomerTransaction ("C003213", LocalDate.parse("1994.11.05" , DateTimeFormatter.ofPattern("yyyy.MM.dd")),221.24));
+            add(new CustomerTransaction ("C004221", LocalDate.parse("1994.08.15" , DateTimeFormatter.ofPattern("yyyy.MM.dd")),25.25));
+            add(new CustomerTransaction ("C008231", LocalDate.parse("1995.12.10" , DateTimeFormatter.ofPattern("yyyy.MM.dd")),52.10));
         }};
     }
 }
