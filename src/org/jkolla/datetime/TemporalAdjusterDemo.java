@@ -1,6 +1,5 @@
 package org.jkolla.datetime;
 
-import java.time.DayOfWeek;
 import java.time.LocalDate;
 
 public class TemporalAdjusterDemo {
