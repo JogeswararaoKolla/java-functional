@@ -22,8 +22,11 @@ public class Rollup {
 
         System.out.println("totalTransAmtByCustomerID = " + totalTransAmtByCustomerID);
 
-        Map<String,Double> sortedTotalTransAmtByCustomerID = new TreeMap<>(Comparator.naturalOrder());
-        sortedTotalTransAmtByCustomerID.putAll(totalTransAmtByCustomerID);
+        TreeMap<String, Double> sortedTotalTransAmtByCustomerID = totalTransAmtByCustomerID.entrySet()
+                .stream()
+                .collect(() -> new TreeMap<>(Comparator.naturalOrder()),
+                        (map1, element) -> map1.put(element.getKey(), element.getValue()),
+                        (map2, map3) -> map2.putAll(map3));
 
         System.out.println("sortedTotalTransAmtByCustomerID = " + sortedTotalTransAmtByCustomerID);
 
