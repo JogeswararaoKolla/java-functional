@@ -28,10 +28,11 @@ public class StringBuilderCollector {
 
         // collect preserves as encountered order of the stream elements in case parallel as well.
         // select collector when doing mutable reduction vs reduce for immutable reduction
-        // supplier produces container for r
-        // accumulator function appends input string to the String builder
+        // supplier produces container which we are collecting. Here produces new result object String Builder
+        // accumulator function appends input string to the result type String builder
         // Combiner combines the partial results here two string builders are concatenated
-        // In execution phase each thread calls supplier it produces its own string Builder object. which produces partial results and combined using combiner.
+        // In execution phase each thread calls supplier (example 4 core it produces 4 String Builder objects) it produces its own string Builder object and appends string for its segment.
+        // Then produces partial results and combined using combiner.
 
     }
 }
