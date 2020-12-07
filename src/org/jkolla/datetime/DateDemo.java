@@ -31,6 +31,8 @@ public class DateDemo {
         long daysToBirthday = currentDate.until(birthday, ChronoUnit.DAYS);
         System.out.println("daysToBirthday = " + daysToBirthday); // daysToBirthday = 202
 
+        System.out.println("daysToBirthday Using ChronoUnit.DAYS = " + ChronoUnit.DAYS.between(currentDate, birthday)); // daysToBirthday Using ChronoUnit.DAYS = 202
+
         LocalDate birthdayAltered = birthday.withMonth(4).withDayOfMonth(29).withYear(1989);
         System.out.println("birthdayAltered = " + birthdayAltered); // birthdayAltered = 1989-04-29
 
