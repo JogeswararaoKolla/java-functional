@@ -9,31 +9,7 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
-class StoreInfoManager {
-    Integer storeNo;
-    String  storeManagerName;
-    Integer storeManagerNo;
-
-    public StoreInfoManager() {
-    }
-
-    public StoreInfoManager(Integer storeNo, String storeManagerName, Integer storeManagerNo) {
-        this.storeNo = storeNo;
-        this.storeManagerName = storeManagerName;
-        this.storeManagerNo = storeManagerNo;
-    }
-
-    @Override
-    public String toString() {
-        return "StoreInfoManager{" +
-                "storeNo=" + storeNo +
-                ", storeManagerName='" + storeManagerName + '\'' +
-                ", storeManagerNo=" + storeManagerNo +
-                '}';
-    }
-}
-
-public class NormalizeDemo {
+public class Normalize {
     public static void main(String[] args) {
 
         Set<Integer> counter1 = Stream.iterate(0, e -> e + 1)
@@ -50,14 +26,14 @@ public class NormalizeDemo {
 
         System.out.println("storesWithMultipleManagers = " + storesWithMultipleManagers);
 
-        List<StoreInfoManager> storeManagers = storesWithMultipleManagers.stream()
+        List<NormalizeTemporaryType> storeManagers = storesWithMultipleManagers.stream()
                 .flatMap(e -> counter1.stream().map(
                         counter ->
-                                counter == 0 ? new StoreInfoManager(e.getStoreNo(), e.getStoreManager1().trim(), counter + 1) :
-                                        counter == 1 ? new StoreInfoManager(e.getStoreNo(), e.getStoreManager2().trim(), counter + 1) :
-                                                counter == 2 ? new StoreInfoManager(e.getStoreNo(), e.getStoreManager3().trim(), counter + 1) :
-                                                        new StoreInfoManager()))
-                .filter(select -> !select.storeManagerName.isBlank())
+                                counter == 0 ? new NormalizeTemporaryType(e.getStoreNo(), e.getStoreManager1().trim(), counter + 1) :
+                                        counter == 1 ? new NormalizeTemporaryType(e.getStoreNo(), e.getStoreManager2().trim(), counter + 1) :
+                                                counter == 2 ? new NormalizeTemporaryType(e.getStoreNo(), e.getStoreManager3().trim(), counter + 1) :
+                                                        new NormalizeTemporaryType()))
+                .filter(select -> !select.getStoreManagerName().isBlank())
                 .collect(Collectors.toList());
 
         storeManagers.stream()
