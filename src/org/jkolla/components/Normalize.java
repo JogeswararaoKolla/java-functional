@@ -33,7 +33,7 @@ public class Normalize {
                                         counter == 1 ? new NormalizeTemporaryType(e.getStoreNo(), e.getStoreManager2().trim(), counter + 1) :
                                                 counter == 2 ? new NormalizeTemporaryType(e.getStoreNo(), e.getStoreManager3().trim(), counter + 1) :
                                                         new NormalizeTemporaryType()))
-                .filter(select -> !select.storeManagerName.isBlank())
+                .filter(select -> !select.getStoreManagerName().isBlank())
                 .collect(Collectors.toList());
 
         storeManagers.stream()

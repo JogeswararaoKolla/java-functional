@@ -1,9 +1,9 @@
 package org.jkolla.components;
 
 public class NormalizeTemporaryType {
-    Integer storeNo;
-    String storeManagerName;
-    Integer storeManagerNo;
+    private Integer storeNo;
+    private String storeManagerName;
+    private Integer storeManagerNo;
 
     public NormalizeTemporaryType() {
     }
@@ -12,6 +12,18 @@ public class NormalizeTemporaryType {
         this.storeNo = storeNo;
         this.storeManagerName = storeManagerName;
         this.storeManagerNo = storeManagerNo;
+    }
+
+    public Integer getStoreNo() {
+        return storeNo;
+    }
+
+    public String getStoreManagerName() {
+        return storeManagerName;
+    }
+
+    public Integer getStoreManagerNo() {
+        return storeManagerNo;
     }
 
     @Override
