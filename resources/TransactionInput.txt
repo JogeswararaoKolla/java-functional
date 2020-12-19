@@ -1,0 +1,17 @@
+334566,Veronica,apple,1,0.45
+334566,Veronica,roast,1,7.85
+334567,Joe,apple,1,0.45
+334567,Joe,orange,2,0.55
+334567,Joe,tomato,2,0.35
+334568,Mary,chicken,2,5.99
+334570,Susan,orange,5,0.55
+334570,Susan,lettuce,1,0.95
+334570,Susan,milk,4,4.99
+334570,Susan,roast,1,6.25
+334570,Susan,bread,2,2.55
+334571,Koko,chicken,2,5.27
+334571,Koko,orange,3,0.55
+334571,Koko,tomato,1,0.35
+334572,Mary,apple,2,0.45
+334572,Mary,milk,1,4.99
+334573,Joe,tomato,3,0.35
