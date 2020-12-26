@@ -1,4 +1,8 @@
 package org.jkolla.components;
+import java.io.BufferedWriter;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Objects;
 import java.util.function.Function;
@@ -27,4 +31,21 @@ public class UtilFunction<T> {
         }
         return result;
     }
+
+    public void writeToFile(List<T> coll, Path path) {
+        try (BufferedWriter writer = Files.newBufferedWriter(path);) {
+            coll.forEach( element -> {
+                try {
+                    writer.write(element.toString());
+                    writer.newLine();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            });
+        } catch (IOException e) {
+            e.printStackTrace();
+            System.out.println("Files exists check : " + Files.exists(path));
+        }
+    }
+
 }
