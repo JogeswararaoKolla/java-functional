@@ -1,9 +1,11 @@
 package org.jkolla.recipes;
 
+import org.jkolla.components.UtilFunction;
 import org.jkolla.models.*;
 
 import java.io.IOException;
 import java.nio.file.Files;
+import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -107,14 +109,35 @@ public class HeaderBodyTrailerTypeProcessing {
 
       //  body.forEach(System.out::println);
       // We are reading 2 collections streams at the same time using Stream.of and then flatten using flatMap()
-        List<HeaderBodyTrailerInterType> headerBodyAndTrailer = Stream.of(headerAndTrailer.stream(), body.stream())
+        List<HeaderBodyTrailerFinalType> headerBodyAndTrailer = Stream.of(headerAndTrailer.stream(), body.stream())
                 .flatMap(Function.identity())
                 .sorted(Comparator.comparing(HeaderBodyTrailerInterType::getTransactionId)
                         .thenComparing(HeaderBodyTrailerInterType::getOrdering))
+                .peek(System.out::println)
+                .map(new Function<HeaderBodyTrailerInterType, HeaderBodyTrailerFinalType>() {
+                    @Override
+                    public HeaderBodyTrailerFinalType apply(HeaderBodyTrailerInterType headerBodyTrailerInterType) {
+                        return new HeaderBodyTrailerFinalType(headerBodyTrailerInterType.getKind(),headerBodyTrailerInterType.getHeader(),headerBodyTrailerInterType.getBody(),headerBodyTrailerInterType.getTrailer());
+                    }
+                })
                 .collect(Collectors.toUnmodifiableList());
 
-        headerBodyAndTrailer.forEach(System.out::println);
+       // headerBodyAndTrailer.forEach(System.out::println);
 
+        Path outputFilePath = Paths.get(".","resources/headerBodyTrailerOutput.txt");
+
+        try {
+            Files.deleteIfExists(outputFilePath);
+            System.out.println("File: " + outputFilePath + " Deleted!");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        // Writing the Collection List<T> data to a File provided path.
+        new UtilFunction<HeaderBodyTrailerFinalType>().writeToFile(headerBodyAndTrailer,outputFilePath);
+
+        boolean exists = Files.exists(outputFilePath);
+        System.out.println("exists = " + exists);
 
     }
 
