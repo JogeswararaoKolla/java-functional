@@ -34,11 +34,11 @@ public class HeaderBodyTrailerFinalType {
 
         String string = new String() ;
         if ( kind == "H" )
-            string = header.getTransactionId() + "," + header.getCustomerName() + "," + header.getNumItems() ;
+            string = kind + "," + header.getTransactionId() + "," + header.getCustomerName() + "," + header.getNumItems() ;
         else if( kind == "B" )
-            string = body.getItem() + ","  + body.getQuantity() + "," + body.getCost();
+            string = kind + "," + body.getItem() + ","  + body.getQuantity() + "," + body.getCost();
         else if( kind == "T")
-            string =  trailer.getTotalQuantity() + "," + trailer.getTotalCost();
+            string = kind + "," + trailer.getTotalQuantity() + "," + trailer.getTotalCost();
 
         return string;
     }
