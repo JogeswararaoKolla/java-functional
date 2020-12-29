@@ -25,7 +25,7 @@ public class HeaderBodyTrailerFlatRecordProcessing {
                     public Stream<HeaderBodyTrailerFlatRecordType> apply(String line) {
 
                         String[] attributes = line.split(",");
-                        HeaderBodyTrailerFlatRecordType headerBodyTrailerFlatRecordType = new HeaderBodyTrailerFlatRecordType();
+                        HeaderBodyTrailerFlatRecordType headerBodyTrailerFlatRecordType = null;
                         try {
                             if (attributes[0].equals("H"))
                                 headerBodyTrailerFlatRecordType = new HeaderBodyTrailerFlatRecordType("H", Integer.parseInt(attributes[1]), attributes[2], Integer.parseInt(attributes[3]), null, null, null, null, null);
@@ -52,14 +52,14 @@ public class HeaderBodyTrailerFlatRecordProcessing {
             e.printStackTrace();
         }
 
-        // Here the errors in input string is handled using the attributes length and try catch block, returns an empty constructor in case of error for a record.
+        // Here the errors in input string is handled using the attributes length and try catch block, returns null in case of error for a record.
         Function<String, HeaderBodyTrailerFlatRecordType> lineToFlatRecord =
                 new Function<String, HeaderBodyTrailerFlatRecordType>() {
                     @Override
                     public HeaderBodyTrailerFlatRecordType apply(String line) {
 
                         String[] attributes = line.split(",");
-                        HeaderBodyTrailerFlatRecordType headerBodyTrailerFlatRecordType = new HeaderBodyTrailerFlatRecordType();
+                        HeaderBodyTrailerFlatRecordType headerBodyTrailerFlatRecordType = null;
                         try {
                             if (attributes[0].equals("H") && attributes.length == 4)
                                 headerBodyTrailerFlatRecordType = new HeaderBodyTrailerFlatRecordType("H", Integer.parseInt(attributes[1]), attributes[2], Integer.parseInt(attributes[3]), null, null, null, null, null);
@@ -78,6 +78,7 @@ public class HeaderBodyTrailerFlatRecordProcessing {
 
            List<HeaderBodyTrailerFlatRecordType> collect = lines
                    .map(e -> lineToFlatRecord.apply(e))
+                   .filter(Objects::nonNull) // Filtering the null objects returned from above mapping phase
                    .collect(Collectors.toList());
            System.out.println("collect.size() = " + collect.size()); // collect.size() = 32
 
